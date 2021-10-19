@@ -53,7 +53,7 @@ func handleConnection(c net.Conn) {
 
 	defer c.Close()
 	//TODO: do something with the connection object.
-	fmt.Printf("Received a new connection to the server from %s\n", c.RemoteAddr().String())
+	log.Printf("Received a new connection to the server from %s", c.RemoteAddr().String())
 
 	r := bufio.NewReader(c)
 
@@ -91,7 +91,7 @@ func handleConnection(c net.Conn) {
 		case "":
 			log.Printf("[%s] %s", user.name, line)
 		case "\\exit":
-			log.Printf("Closing chat connection to the client %s\n", c.RemoteAddr().String())
+			log.Printf("Closing chat connection to the client %s", c.RemoteAddr().String())
 			return
 		case "\\name":
 			user.setUsername(commandArg)
@@ -114,7 +114,7 @@ func generateUsername() string {
 // setUsername sets the username field in user type with the given name
 // TODO: check existing active usernames and return error if given name cannot be selected.
 func (u *user) setUsername(name string) error {
-	log.Printf("Setting username of user %s to %s\n", u.name, name)
+	log.Printf("Setting username of user %s to %s", u.name, name)
 	u.name = name
 	return nil
 }
